@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP OO</title>
+    <title>Caneta</title>
 </head>
 <body>
-<?php
-    require_once 'Caneta.php';
-    $cl = new Caneta;
-    $cl->modelo = "Bic Cristal";
-    $cl->cor = "Azul";
-    // $cl->ponta = 0.5;
-    $cl->rabiscar();
-    $cl->tampar();
-    var_dump($cl);
-
-?>    
+<pre>
+    <?php
+        require_once 'Caneta.php';
+        $caneta = new Caneta("Bic" ,"Vermelho" ,0.5);
+        $caneta02 = new Caneta("Bic" ,"Azul" ,1.5);
+        // $caneta->setModelo("Bic");
+        // $caneta->setPonta(0.5);
+        var_dump($caneta);
+        var_dump($caneta02);
+        // echo "Eu tenho uma Caneta " .$caneta->getModelo()." de Ponta ". $caneta->getPonta();
+    ?>
+</pre>
 </body>
 </html>
