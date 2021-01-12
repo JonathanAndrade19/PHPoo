@@ -12,31 +12,57 @@ class ContaBanco{
         $this->setTipo($t);
         $this->setStatus(true);
 
-        if($t == "CC"){
+        if ( $t == "CC" ){
             $this->setSaldo(50);
-        }elseif($t == "CP"){
+        } elseif ( $t == "CP" ){
             $this->setSaldo(1500);
         }
     } 
     public function fecharConta(){
-
+        if ( $this->getSaldo() > 0 ){
+            echo "<p>A Conta ainda tem Saldo, não e possivel finalizala!</p>";
+        } elseif ( $this->getSaldo() < 0 ){
+            echo "<p>A Conta Está em Debito. Impossivel Finalizala!</p>";
+        } else {
+            $this->setStatus(false);
+        }
     }
-    public function depositar(){
-
+    public function depositar($v){
+        if ( $this->getStatus() ){
+            $this->setSaldo( $this->getSaldo() + $v );
+        } else {
+            echo "<p>Conta Fechada com Sucesso, Não e mais possivel Depositar!</p>";
+        }
     }
-    public function sacar(){
-
+    public function sacar($v){
+        if($this->getStatus()){
+            if ( $this->getSaldo() > $v ){
+                $this->setSaldo( $this->getSaldo() - $v );
+            } else {
+                echo "<p>Saldo Insuficiente para Sacar.</p>";
+            }
+        } else {
+            echo "<p>Imposivel sacar de uma conta Inativa!</p>";
+        }
     }
     public function pagarMensal(){
+        if ( $this->getTipo() == "CC" ){
+            $v = 12;
+        } elseif ( $this->getTipo() == "CP" ){
+            $v = 20;
+        }
 
+        if($this->getStatus()){
+            $this->setSaldo( $this->getSaldo() - $v );
+        } else {
+            echo "<p>Problema Com a conta, Não e Possivel Cobrar a Anuidade.</p>";
+        }
     }
 //Métodos Especiais
     public function __construct(){
-        $this->numeroConta;
-        $this->tipo;
-        $this->nomeDono;
-        $this->saldo;
-        // $this->status;
+        $this->setSaldo(0);
+        $this->setStatus(false);
+        echo "<p>Conta Criada Com Sucesso!</p>";
     }
 
     public function getNumeroConta(){

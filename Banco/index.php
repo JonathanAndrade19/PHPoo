@@ -8,6 +8,8 @@
 <body>
     <?php
     require_once 'ContaBanco.php';
+    $Conta01 = new ContaBanco();
+    $Conta02 = new ContaBanco();
     ?>
 </body>
 </html>
